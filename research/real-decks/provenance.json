@@ -1,0 +1,197 @@
+{
+  "retrieved": "2026-10-18T15:08:32.464Z",
+  "pins": [
+    {
+      "commit": "a086271ff692bdaaecc6c35907624a0c3fb2b160",
+      "files": [
+        "README.md",
+        "LICENSE",
+        "paper-slides/Attention_Is_All_You_Need.html",
+        "paper-slides/Dialogue_Director.html",
+        "paper-slides/DySample_Learning_to_Upsample.html"
+      ],
+      "dir": "paper-master",
+      "repo": "luoqianshi/Paper-Master"
+    },
+    {
+      "commit": "e22a68602ad42b80875bf93e7535145480ad6990",
+      "files": [
+        "README.en.md",
+        "LICENSE",
+        "docs/SLIDE-md/SLIDE-md-gemini-color-system/sample.html"
+      ],
+      "dir": "slide-md",
+      "repo": "sho-ai-magic/slide.md"
+    }
+  ],
+  "files": [
+    {
+      "file": "paper-master/README.md",
+      "bytes": 20553,
+      "sha256": "ebe3489821f5f7db01d260bb6c5415855286af10e55949017b5a153ffd382b2b",
+      "gitBlob": "77376f6121f1e316ca81dfbb8ef5e8b972bdc7d1",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/README.md"
+    },
+    {
+      "file": "paper-master/LICENSE",
+      "bytes": 1080,
+      "sha256": "a62575f7a4b5c6f95bd52037c5ace6e11295691e48fad419df0579b5bfd13ec6",
+      "gitBlob": "c9538a156ce2cc41066cbde93e3d0cfade66b4df",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/LICENSE"
+    },
+    {
+      "file": "paper-master/paper-slides/Attention_Is_All_You_Need.html",
+      "bytes": 36125,
+      "sha256": "6e56282bacd114d3a67b7e80ae96bcb782e51be43a234aaa6bc658435436712b",
+      "gitBlob": "0524ebac10a15a85ceb9005d95efcc1abd7a3f8d",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/Attention_Is_All_You_Need.html"
+    },
+    {
+      "file": "paper-master/paper-slides/Dialogue_Director.html",
+      "bytes": 39795,
+      "sha256": "990018861529458968d33763162ffe26b9e29ffe14c284bf6dd7d821ca1b4e0b",
+      "gitBlob": "219f57d301dcc6f2fcfac4c3d23e906963e5207c",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/Dialogue_Director.html"
+    },
+    {
+      "file": "paper-master/paper-slides/DySample_Learning_to_Upsample.html",
+      "bytes": 50314,
+      "sha256": "cea6f929db3ed9c38cfaa61942fe021b97282734658291cb800e3a235d9a205f",
+      "gitBlob": "946e8480d63ce6d5224417f86057d426ad8ff3fc",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/DySample_Learning_to_Upsample.html"
+    },
+    {
+      "file": "paper-master/assets/favicon.png",
+      "bytes": 429793,
+      "sha256": "72522a2ac32b563af0051140786dae8edd42f3c5facd0fe9d1ff29bee568c80a",
+      "gitBlob": "7ecb50e1e26b1dfc439c8d19c991e969169abb08",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/favicon.png"
+    },
+    {
+      "file": "paper-master/paper-slides/Attention_Is_All_You_Need_assets/crop_001_page003_reg1.png",
+      "bytes": 115054,
+      "sha256": "921db973f814406b8ca6013f80d26bdf4bce2513b24bf7679e35d499e4d12511",
+      "gitBlob": "bc6c940a1b29c17181af5e508d1313b37505dbd4",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/Attention_Is_All_You_Need_assets/crop_001_page003_reg1.png"
+    },
+    {
+      "file": "paper-master/paper-slides/Attention_Is_All_You_Need_assets/crop_003_page004_reg2.png",
+      "bytes": 18803,
+      "sha256": "51fed348ea855ac5a6c19557b20f6d7110a3918825677f390c1fc80e24a4bcf4",
+      "gitBlob": "8f584cdc767cdb4be6f53a8fc35bab27eaa99673",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/Attention_Is_All_You_Need_assets/crop_003_page004_reg2.png"
+    },
+    {
+      "file": "paper-master/paper-slides/Attention_Is_All_You_Need_assets/crop_002_page004_reg1.png",
+      "bytes": 44367,
+      "sha256": "f308e1bde6c322498e3c80fd86cfe3f6a571c9af1817898e07b5f852499c9e5c",
+      "gitBlob": "8e1bd2e76493fba847e97d54c1d37d4f34ed0ff4",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/Attention_Is_All_You_Need_assets/crop_002_page004_reg1.png"
+    },
+    {
+      "file": "paper-master/paper-slides/Dialogue_Director/crop_002_page003_reg1.png",
+      "bytes": 486368,
+      "sha256": "c64d1700e0cb86a55ba55044e9b6b78f0e5d229a48f26d0a773d4ec76139b748",
+      "gitBlob": "9405606baffaec7e8b02f3dabfc6d8f95ab85f04",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/Dialogue_Director/crop_002_page003_reg1.png"
+    },
+    {
+      "file": "paper-master/paper-slides/Dialogue_Director/crop_003_page005_reg1.png",
+      "bytes": 958076,
+      "sha256": "6a945540e2593f0841d2e60521fa83b077f10de0df33b40c1a413652d797dc30",
+      "gitBlob": "66e7f3d2f012d907bc3419cff97148613d55164c",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/Dialogue_Director/crop_003_page005_reg1.png"
+    },
+    {
+      "file": "paper-master/paper-slides/Dialogue_Director/crop_004_page005_reg2.png",
+      "bytes": 396398,
+      "sha256": "6a03c84c47d7efc57eba9591defbc2c1bc419ebdba4da98977e976473b8068cb",
+      "gitBlob": "20052ed45962dfbf20e9d269d8c3e7842e8721b2",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/paper-slides/Dialogue_Director/crop_004_page005_reg2.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig1.png",
+      "bytes": 32901,
+      "sha256": "6a30c7ab586ba0cb00e8ddcbc7b73753c990ec84839ec9735e2b719b7f2f7c89",
+      "gitBlob": "9a5dc0fcc4de0bb49a8e2e08db1aa66a956acee1",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig1.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig2.png",
+      "bytes": 60444,
+      "sha256": "cddd37d7ac0ee6900176baff1b837dfadc4966e0371d958678c30241691b5c41",
+      "gitBlob": "d0900727499956aa865852ea475f704e8892e054",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig2.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig3.png",
+      "bytes": 10472,
+      "sha256": "0bc688e59f0159405ed5e40cf8ed1faddd7688dddf7fc7431522d0dff0b5e1e6",
+      "gitBlob": "2da567ae9c04574a9910e02e7ded80326b9a47bd",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig3.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig4.png",
+      "bytes": 48385,
+      "sha256": "e8ab97b6c97ca7601cf7e1750850f42a34a988bb5e3f0cc6e8b0e349cd26f244",
+      "gitBlob": "7b39e7c2c71b1ca8d7dabfe2916362e335abbdff",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig4.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig5.png",
+      "bytes": 26222,
+      "sha256": "6f97325339b4177c935fdbec6fd4d4288c03c336d5ce888a2cc2c42d5675bb5f",
+      "gitBlob": "e1280fb7a837b91898114495de1d71f0120b3fb3",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig5.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig6.png",
+      "bytes": 14762,
+      "sha256": "c88c284b7cfc39c8dfbbb29d92979f42f77b7784022822c231c810100cd1d953",
+      "gitBlob": "0847fee2fbbc7dd95481e9e6f68ee35d261a63bd",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig6.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig7.png",
+      "bytes": 748664,
+      "sha256": "bb351e18e0b6f3bc813994fa3bed0ac0eb8d13d82b89c5b2ab1e96f7fc933562",
+      "gitBlob": "93d6325ab24606485e31aebda3e7d878bf91a0cb",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig7.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig8.png",
+      "bytes": 46222,
+      "sha256": "86963242bc6f732880cac20cb6142e9cc858603a556432aacd3658bec4af210a",
+      "gitBlob": "8c4d63a6fd780018068a6fa4c19da2fe56b8f063",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig8.png"
+    },
+    {
+      "file": "paper-master/assets/paper-imgs/DySample/dysample_fig9.png",
+      "bytes": 1478721,
+      "sha256": "fd4651ba3eea75f7bcbd4aacc5fa0cf1f6bc64820a44dddcd425400721facc27",
+      "gitBlob": "c778f32e027cb0c0af2cb80dce3fb64406d9539d",
+      "url": "https://raw.githubusercontent.com/luoqianshi/Paper-Master/a086271ff692bdaaecc6c35907624a0c3fb2b160/assets/paper-imgs/DySample/dysample_fig9.png"
+    },
+    {
+      "file": "slide-md/README.en.md",
+      "bytes": 16538,
+      "sha256": "ac1e9490dfe0fa76193c707aeb40528f6933b9a29b813c96993fee5a3dace7c5",
+      "gitBlob": "33d8039bd84b76ab70ee82e758e2c739d2812719",
+      "url": "https://raw.githubusercontent.com/sho-ai-magic/slide.md/e22a68602ad42b80875bf93e7535145480ad6990/README.en.md"
+    },
+    {
+      "file": "slide-md/LICENSE",
+      "bytes": 1069,
+      "sha256": "ce4cf7b830836d649204fbdbd35d8fb96df7c8d9673c74727eea0450cab7c668",
+      "gitBlob": "0a2596cbeeff260d6c0e55f1a684418617672622",
+      "url": "https://raw.githubusercontent.com/sho-ai-magic/slide.md/e22a68602ad42b80875bf93e7535145480ad6990/LICENSE"
+    },
+    {
+      "file": "slide-md/docs/SLIDE-md/SLIDE-md-gemini-color-system/sample.html",
+      "bytes": 940724,
+      "sha256": "aa7e243623fee6fb37821af661a9b78e92459fbfac120d5c543751432166c591",
+      "gitBlob": "e5f0b4c76f2af0b2911c97450f07d1857d5a1fa3",
+      "url": "https://raw.githubusercontent.com/sho-ai-magic/slide.md/e22a68602ad42b80875bf93e7535145480ad6990/docs/SLIDE-md/SLIDE-md-gemini-color-system/sample.html"
+    }
+  ]
+}

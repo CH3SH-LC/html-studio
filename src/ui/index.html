@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HTML Studio</title><link rel="stylesheet" href="app.css"></head>
+<body>
+  <header class="topbar">
+    <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="9" fill="currentColor"/><path d="M10 10v12m12-12v12M10 16h12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg><span>HTML Studio</span><span class="version">本地版</span></div>
+    <div id="fileInfo" class="file-info hidden"><span id="filename"></span><span id="saveState" class="save-state"></span></div>
+    <div class="top-actions">
+      <button id="open" class="button subtle" title="打开演示稿 · Ctrl+O">打开</button>
+      <div id="documentActions" class="document-actions hidden">
+        <span class="separator"></span>
+        <button id="homeButton" class="icon-button" aria-label="返回首页" title="返回首页"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg></button>
+        <button id="undo" class="icon-button" aria-label="撤销" title="撤销 · Ctrl+Z"><svg viewBox="0 0 24 24"><path d="m9 5-6 6 6 6M3 11h11a6 6 0 0 1 6 6v2"/></svg></button>
+        <button id="redo" class="icon-button" aria-label="重做" title="重做 · Ctrl+Y"><svg viewBox="0 0 24 24"><path d="m15 5 6 6-6 6m6-6H10a6 6 0 0 0-6 6v2"/></svg></button>
+        <button id="save" class="button outline" title="保存 · Ctrl+S">保存</button>
+        <button id="play" class="button primary" title="从当前页播放 · F5"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></svg>播放</button>
+        <button id="more" class="icon-button" aria-label="更多操作" title="更多操作">···</button>
+      </div>
+    </div>
+  </header>
+  <main id="home" class="home">
+    <div class="home-content">
+      <div class="hero-art" aria-hidden="true"><div class="paper back"></div><div class="paper front"><span class="paper-kicker"></span><span class="paper-title"></span><span class="paper-title short"></span><div class="paper-bottom"><i></i><span></span></div><div class="edit-dot"><svg viewBox="0 0 24 24"><path d="m5 15 10-10 4 4L9 19l-5 1Z"/><path d="m12 8 4 4"/></svg></div></div></div>
+      <div class="eyebrow">从 AI 成稿，到你的定稿</div>
+      <h1>把最后一点，<br>改到满意。</h1>
+      <p class="intro">改几个字，换一张图，挪一下位置。<br>打开 HTML 演示稿，直接在画面上修改。</p>
+      <button id="homeOpen" class="button primary large"><svg viewBox="0 0 24 24"><path d="M3 7V5h6l2 2h10v13H3ZM3 10h18"/></svg>打开演示稿</button>
+      <p class="drop-hint">也可以将 .html 文件拖到这里</p>
+      <button id="sample" class="text-button">先用示例试一试 <span>↗</span></button>
+      <span class="home-help-separator">·</span><button id="homeHelp" class="text-button">使用说明</button>
+    </div>
+    <div class="home-bottom"><span class="local-dot"></span>文件留在本地，无需登录</div>
+    <section id="recent" class="recent hidden"><h2>最近打开</h2><div id="recentList"></div></section>
+  </main>
+  <section id="workspace" class="workspace hidden">
+    <aside id="sidebar" class="sidebar"><div class="sidebar-heading"><span>页面</span><span id="pageCount"></span></div><div id="thumbnails" class="thumbnails"></div></aside>
+    <div class="work-area">
+      <div id="contextBar" class="context-bar">
+        <span id="selectionHint" class="selection-hint">单击选中 · 双击改字</span>
+        <div id="textTools" class="tool-group hidden">
+          <label class="size-label" title="字号"><input id="fontSize" type="number" min="6" max="300" step="1" aria-label="字号"><span>字号</span></label>
+          <label class="color-tool" title="文字颜色"><span>A</span><input id="textColor" type="color" aria-label="文字颜色"></label>
+          <span class="separator"></span>
+          <button id="bold" class="tool-button" title="加粗 · Ctrl+B" aria-label="加粗"><b>B</b></button>
+          <button id="italic" class="tool-button" title="斜体 · Ctrl+I" aria-label="斜体"><i>I</i></button>
+          <span class="separator"></span>
+          <button data-align="left" class="tool-button" title="左对齐" aria-label="左对齐"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 10h10M4 15h16M4 20h10"/></svg></button>
+          <button data-align="center" class="tool-button" title="居中" aria-label="居中"><svg viewBox="0 0 24 24"><path d="M4 5h16M7 10h10M4 15h16M7 20h10"/></svg></button>
+          <button data-align="right" class="tool-button" title="右对齐" aria-label="右对齐"><svg viewBox="0 0 24 24"><path d="M4 5h16M10 10h10M4 15h16M10 20h10"/></svg></button>
+        </div>
+        <div id="imageTools" class="tool-group hidden">
+          <button id="replaceImage" class="button small outline">换图</button>
+          <div class="segmented"><button id="imageContain">完整显示</button><button id="imageCover">铺满</button></div>
+          <button id="cropImage" class="button small subtle">调整可见位置</button>
+        </div>
+        <div id="cropTools" class="tool-group hidden"><label>左右 <input id="cropX" type="range" min="0" max="100" value="50"></label><label>上下 <input id="cropY" type="range" min="0" max="100" value="50"></label><button id="cropDone" class="button small outline">完成</button></div>
+        <div class="context-spacer"></div>
+        <label id="backgroundTool" class="background-tool hidden" title="修改纯色背景"><input id="backgroundColor" type="color" value="#ffffff" aria-label="背景颜色"><span id="backgroundLabel">背景色</span></label>
+        <button id="selectParent" class="button small subtle hidden">选中整块</button>
+        <button id="deleteObject" class="icon-button hidden" aria-label="删除选中内容" title="删除选中内容"><svg viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg></button>
+      </div>
+      <div id="alertBar" class="alert-bar hidden"><span id="alertText"></span><button id="alertAction" class="text-button"></button><button id="alertDismiss" class="icon-button" aria-label="收起提示">×</button></div>
+      <div id="canvasArea" class="canvas-area"><div id="canvasSizer" class="canvas-sizer"><iframe id="canvas" title="演示稿编辑画布" sandbox="allow-same-origin"></iframe></div><div id="loading" class="loading hidden">正在打开文稿…</div></div>
+      <footer class="statusbar"><div class="page-tools"><button id="previousPage" aria-label="上一页" title="上一页 · PageUp">‹</button><span id="pageStatus">第 1 / 1 页</span><button id="nextPage" aria-label="下一页" title="下一页 · PageDown">›</button></div><span id="objectStatus" class="object-status"></span><div class="zoom-tools"><button id="zoomOut" aria-label="缩小">−</button><button id="zoomValue" title="恢复适合窗口">100%</button><button id="zoomIn" aria-label="放大">＋</button><span class="separator"></span><button id="fit">适合窗口</button></div></footer>
+    </div>
+  </section>
+  <div id="moreMenu" class="menu hidden" role="menu"><button data-action="save-as">另存为… <kbd>Ctrl+Shift+S</kbd></button><button data-action="overwrite">覆盖原稿…</button><button data-action="show-file">在文件夹中显示</button><hr><button data-action="play-first">从首页播放</button><button data-action="background">当前页背景色…</button><button data-action="resources">定位素材文件夹…</button><button data-action="reload">重新载入文件</button><hr><button data-action="help">使用说明</button></div>
+  <div id="contextMenu" class="menu hidden" role="menu"></div>
+  <div id="toast" class="toast hidden" role="status"></div>
+  <div id="dropOverlay" class="drop-overlay hidden"><div>松开，打开这份演示稿<span>HTML / HTM</span></div></div>
+  <dialog id="recoveryDialog"><div class="dialog-icon">↶</div><h2>继续上次的修改？</h2><p id="recoveryText"></p><p class="muted">这些修改尚未写入正式文件。</p><div class="dialog-actions"><button id="discardRecovery" class="button subtle">放弃恢复</button><button id="restore" class="button primary">恢复修改</button></div></dialog>
+  <dialog id="helpDialog"><h2>几步就能改好</h2><div class="help-grid"><b>改文字</b><span>双击文字，直接输入。</span><b>改样式</b><span>选中内容，在上方调整字号、颜色和对齐。</span><b>挪位置</b><span>拖动选中边框；方向键微调，Shift 加快。</span><b>换图片</b><span>选中图片 → 换图。新图会随文稿保存。</span><b>保存</b><span>Ctrl+S。原稿第一次保存会生成修改版。</span><b>演示</b><span>播放或 F5，Esc 返回编辑。</span></div><p class="muted">支持常见静态 HTML 演示稿与基础 reveal.js 分页。复杂图表在播放时显示，内部数据暂不编辑。外部网络素材仍可能需要联网。</p><div class="dialog-actions"><button id="closeHelp" class="button primary">知道了</button></div></dialog>
+  <script type="module" src="app.js"></script>
+</body></html>

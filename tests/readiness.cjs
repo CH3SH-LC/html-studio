@@ -1,0 +1,52 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {_electron:electron}=require('playwright');
+const root=path.resolve(__dirname,'..'),version=require('../package.json').version;
+const workspace=path.join(root,'test-results','readiness',String(Date.now())),profile=path.join(workspace,'profile');
+fs.mkdirSync(workspace,{recursive:true});
+const exe=path.join(root,'dist',`HTML-Studio-${version}-win-x64`,'HTML Studio.exe');
+const env={...process.env,HTML_STUDIO_PROFILE:profile};delete env.ELECTRON_RUN_AS_NODE;
+const report={version,started:new Date().toISOString(),checks:[],errors:[]};let app,page;
+const check=(name,detail)=>{report.checks.push({name,detail,passed:true});console.log('PASS '+name);};
+async function boot(){
+  app=await electron.launch({executablePath:exe,args:[],env});page=await app.firstWindow();await page.waitForSelector('#homeOpen');page.on('pageerror',e=>report.errors.push(e.message));
+  await app.evaluate(({dialog})=>{
+    global.__dialog={open:null,save:null,response:1,openCount:0,saveCount:0,messageCount:0};
+    dialog.showOpenDialog=async()=>{global.__dialog.openCount++;return global.__dialog.open?{canceled:false,filePaths:[global.__dialog.open]}:{canceled:true,filePaths:[]};};
+    dialog.showSaveDialog=async(_win,options)=>{global.__dialog.saveCount++;global.__dialog.defaultPath=options.defaultPath;return global.__dialog.save?{canceled:false,filePath:global.__dialog.save}:{canceled:true};};
+    dialog.showMessageBox=async()=>{global.__dialog.messageCount++;return {response:global.__dialog.response};};
+  });
+}
+async function dialogs(values){await app.evaluate((_e,values)=>Object.assign(global.__dialog,values),values);}
+async function open(file){await dialogs({open:file});await page.locator('#open').click();await page.waitForFunction(name=>document.getElementById('filename').textContent===name,path.basename(file));await page.locator('#loading').waitFor({state:'hidden'});}
+async function text(value){await page.frameLocator('#canvas').locator('h1').first().dblclick();await page.keyboard.press('Control+A');await page.keyboard.insertText(value);}
+async function save(file){await dialogs({save:file});await page.locator('#save').click();await page.waitForFunction(()=>document.getElementById('saveState').textContent==='已保存');}
+async function end(){if(app){await app.evaluate(({app})=>app.exit(0)).catch(()=>{});await app.close().catch(()=>{});app=null;}}
+const html='<html><head><meta charset="utf-8"><style>body{margin:0}section{width:1200px;height:675px;padding:50px;box-sizing:border-box}h1{font-size:40px}section+section{display:none}</style></head><body><section class="slide"><h1>原来标题</h1><p>其他内容</p><img src="lost.png" width="100" height="100"></section><section class="slide"><h1>第二页</h1></section></body></html>';
+async function main(){
+  await boot();assert.equal(await app.evaluate(({app})=>app.isHardwareAccelerationEnabled()),false);check('direct executable starts without flags or a development server');
+  await page.locator('#homeHelp').click();await page.locator('#helpDialog[open]').waitFor();await page.locator('#closeHelp').click();
+  await page.locator('#sample').click();await page.locator('#nextPage').click();await page.waitForFunction(()=>document.getElementById('pageStatus').textContent.includes('第 2'));await page.locator('#previousPage').click();await page.waitForFunction(()=>document.getElementById('pageStatus').textContent.includes('第 1'));check('home help and explicit page navigation');
+  await page.locator('#save').click();const defaults=await app.evaluate(({app})=>({path:global.__dialog.defaultPath,documents:app.getPath('documents')}));assert.equal(path.dirname(defaults.path),defaults.documents);check('bundled example saves by default in user Documents');
+  const file=path.join(workspace,'普通文稿.html');fs.writeFileSync(file,html);await open(file);await text('取消打开仍然保留');
+  await page.waitForFunction(()=>document.getElementById('undo').disabled===false);await page.waitForTimeout(700);
+  const recovery=path.join(profile,'recovery.json');assert.ok(fs.readFileSync(recovery,'utf8').includes('取消打开仍然保留'));
+  await dialogs({open:null});const messages=await app.evaluate(()=>global.__dialog.messageCount);await page.locator('#open').click();await page.waitForTimeout(150);assert.equal(await app.evaluate(()=>global.__dialog.messageCount),messages);assert.ok(fs.existsSync(recovery));assert.match(await page.frameLocator('#canvas').locator('h1').first().textContent(),/取消打开/);check('canceled open keeps edits and crash recovery without discard prompt');
+  const bad=path.join(workspace,'损坏.html');fs.writeFileSync(bad,Buffer.from([0xc0,0xc0]));await dialogs({open:bad});await page.locator('#open').click();await page.locator('#toast').filter({hasText:'文字编码'}).waitFor();assert.ok(fs.existsSync(recovery));assert.match(await page.frameLocator('#canvas').locator('h1').first().textContent(),/取消打开/);check('invalid new file leaves current document and recovery intact');
+  const output=path.join(workspace,'已保存.html');await save(output);await text('保存之后继续');await page.locator('#undo').click();await page.locator('#loading').waitFor({state:'hidden'});await page.waitForFunction(()=>document.getElementById('saveState').textContent==='已保存');assert.match(await page.frameLocator('#canvas').locator('h1').first().textContent(),/取消打开/);check('undo immediately after save returns to saved state');
+  await page.frameLocator('#canvas').locator('h1').first().click();await page.frameLocator('#canvas').locator('h1').first().evaluate(el=>{for(let i=0;i<30;i++)el.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true}));});await page.locator('#save').click();await page.waitForFunction(()=>document.getElementById('saveState').textContent==='已保存');assert.match(fs.readFileSync(output,'utf8'),/translate: 30px(?: 0px)? !important/);check('rapid queued moves are all included in immediate save');
+  await app.evaluate(({app})=>{const req=process.getBuiltinModule('module').createRequire(app.getAppPath()+'/package.json');const {SourceDocument}=req('./src/document.cjs');global.__apply=SourceDocument.prototype.apply;SourceDocument.prototype.apply=function(){throw new Error('模拟提交失败');};});
+  await text('提交失败后可重试');await page.locator('#save').click();await page.locator('#toast').filter({hasText:'模拟提交失败'}).waitFor();assert.ok(!fs.readFileSync(output,'utf8').includes('提交失败后可重试'));assert.match(await page.frameLocator('#canvas').locator('h1').first().textContent(),/提交失败后可重试/);
+  await app.evaluate(({app})=>{process.getBuiltinModule('module').createRequire(app.getAppPath()+'/package.json')('./src/document.cjs').SourceDocument.prototype.apply=global.__apply;});
+  await page.locator('#save').click();await page.waitForFunction(()=>document.getElementById('saveState').textContent==='已保存');assert.ok(fs.readFileSync(output,'utf8').includes('提交失败后可重试'));check('failed edit transaction cannot silently save stale content; retry preserves text');
+  await text('设置写入失败不影响文稿');await app.evaluate(()=>{const fs=process.getBuiltinModule('fs');global.__rename=fs.renameSync;fs.renameSync=(from,to)=>{if(String(to).endsWith('settings.json'))throw new Error('模拟最近文件列表失败');return global.__rename(from,to);};});await page.locator('#save').click();await page.waitForFunction(()=>document.getElementById('saveState').textContent==='已保存');assert.ok(fs.readFileSync(output,'utf8').includes('设置写入失败不影响文稿'));await app.evaluate(()=>{process.getBuiltinModule('fs').renameSync=global.__rename;});check('settings write failure does not report a successful document save as failed');
+  await page.locator('#zoomIn').click();const zoom=await page.locator('#zoomValue').textContent();await page.frameLocator('#canvas').locator('h1').first().click();await page.keyboard.press('ArrowDown');await page.locator('#undo').click();await page.locator('#loading').waitFor({state:'hidden'});assert.equal(await page.locator('#zoomValue').textContent(),zoom);check('undo preserves chosen zoom');
+  await page.locator('#homeButton').click();await page.locator('#home').waitFor({state:'visible'});await page.locator('.recent-item').first().click();await page.locator('#loading').waitFor({state:'hidden'});check('return home and reopen the recent saved document');
+  const old=path.join(workspace,'旧编码.html');fs.writeFileSync(old,Buffer.concat([Buffer.from([255,254]),Buffer.from(html.replace('utf-8','utf-16le'),'utf16le')]));await open(old);
+  const assets=path.join(workspace,'找到的素材');fs.mkdirSync(assets);fs.copyFileSync(path.join(root,'src','ui','icon.png'),path.join(assets,'lost.png'));await dialogs({open:assets});await page.locator('#alertAction').click();await page.locator('#loading').waitFor({state:'hidden'});await text('恢复旧编码文稿');await page.waitForFunction(()=>document.getElementById('undo').disabled===false);await page.waitForTimeout(700);assert.ok(JSON.parse(fs.readFileSync(recovery,'utf8')).assetRoots.includes(assets));
+  const realPid=await app.evaluate(()=>process.pid);const closed=app.waitForEvent('close').catch(()=>{});process.kill(realPid,'SIGKILL');await closed;app=null;await boot();await page.locator('#restore').click();await page.locator('#loading').waitFor({state:'hidden'});assert.equal(await page.frameLocator('#canvas').locator('img').evaluate(el=>el.complete&&el.naturalWidth>0),true);const restored=path.join(workspace,'恢复后的副本.html');await save(restored);const bytes=fs.readFileSync(restored,'utf8');assert.ok(bytes.includes('恢复旧编码文稿'));assert.ok(bytes.includes('charset="utf-8"'));check('crash recovery preserves legacy encoding and approved asset folder');
+  await open(restored);assert.match(await page.frameLocator('#canvas').locator('h1').first().textContent(),/恢复旧编码/);check('recovered saved copy reopens with correct Chinese characters');
+  await page.screenshot({path:path.join(workspace,'ready-editor.png')});
+  assert.deepEqual(report.errors,[]);report.passed=true;
+}
+main().catch(async error=>{report.passed=false;report.error=error.stack;console.error(error.stack);if(page)await page.screenshot({path:path.join(workspace,'failure.png')}).catch(()=>{});process.exitCode=1;}).finally(async()=>{await end();report.finished=new Date().toISOString();fs.writeFileSync(path.join(workspace,'report.json'),JSON.stringify(report,null,2));fs.writeFileSync(path.join(root,'test-results','readiness','latest.json'),JSON.stringify({workspace,...report},null,2));console.log('REPORT '+workspace);});

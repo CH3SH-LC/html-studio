@@ -1,0 +1,21 @@
+HTML Studio 0.3.0 third-party components
+
+HTML Studio source code is MIT licensed; see HTML-STUDIO-LICENSE.txt in the
+portable application, or LICENSE in the source repository. The LICENSE beside
+the executable belongs to Electron. Third-party components retain their own licenses.
+
+Electron 43.1.0 — MIT. Its Chromium, Node.js and other notices are included in LICENSE and LICENSES.chromium.html beside the executable.
+https://www.electronjs.org/
+
+parse5 7.3.0 — MIT. License is included in resources/app/node_modules/parse5/LICENSE.
+https://github.com/inikulin/parse5
+
+entities — BSD-2-Clause. License is included in resources/app/node_modules/entities/LICENSE.
+https://github.com/fb55/entities
+
+reveal.js 5.2.1 — MIT. Used by the bundled sample; license is included in resources/app/samples/reveal/LICENSE.
+https://github.com/hakimel/reveal.js
+
+Playwright is used only during development and is not shipped in the application.
+
+The application icon, demonstration layout and landscape SVG were created for this project.

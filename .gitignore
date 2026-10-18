@@ -1,0 +1,17 @@
+node_modules/
+.runtime/
+.cache/
+dist/
+test-results/
+*.log
+*.lnk
+.env
+.env.*
+!.env.example
+# Local investigation and execution evidence stay on this machine.
+/docs/0[1-7]-*.md
+/research/*
+!/research/real-decks/
+/research/real-decks/*
+!/research/real-decks/README.md
+!/research/real-decks/provenance.json
