@@ -10,14 +10,14 @@ A simple local desktop editor for small changes to AI-generated HTML presentatio
 
 ## 打开即用
 
-1. 从 [Releases](https://github.com/CH3SH-LC/html-studio/releases) 下载 `HTML-Studio-0.3.0-win-x64.zip`。
+1. 从 [Releases](https://github.com/CH3SH-LC/html-studio/releases) 下载 `HTML-Studio-0.3.1-win-x64.zip`。
 2. 解压整个文件夹，双击 **HTML Studio.exe**。
 3. 打开或拖入 HTML；单击选中，双击改字，选中图片后点击“换图”。
 4. **Ctrl+S** 保存修改副本，**F5** 从当前页播放，**Esc** 返回编辑器。
 
 无需安装 Node.js、启动服务或登录。移动应用时保留整个文件夹。首次可以体验内置示例。发布页同时提供 SHA-256 校验文件。
 
-当前提供 **Windows x64 · 0.3.0** 便携应用。包含 Chromium，解压约 350 MiB；未做商业代码签名。macOS、Linux 暂无发行版。
+当前提供 **Windows x64 · 0.3.1** 便携应用。包含 Chromium，解压约 350 MiB；未做商业代码签名。macOS、Linux 暂无发行版。
 
 ## 可以做什么
 

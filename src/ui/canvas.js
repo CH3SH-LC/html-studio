@@ -202,11 +202,16 @@ export class CanvasEditor {
     if(!this.selected?.isConnected){this.overlay.style.display='none';return;}
     const rect=this.selected.getBoundingClientRect();Object.assign(this.overlay.style,{display:'block',left:rect.x+'px',top:rect.y+'px',width:rect.width+'px',height:rect.height+'px',borderWidth:(1.5/this.scale)+'px'});
     const area=6/this.scale;
+    // Keep the center clickable even when fit-to-window makes text very short.
+    // Border handles previously overlapped and intercepted the second click.
+    const border=1.5/this.scale;
+    const insetX=Math.max(0,Math.min(area,rect.width/4-border));
+    const insetY=Math.max(0,Math.min(area,rect.height/4-border));
     for(const edge of this.overlay.querySelectorAll('[data-edge]')){
       const direction=edge.dataset.edge;
       edge.style.display=this.editing||this.readOnly(this.selected)?'none':'block';
-      if(direction==='top'||direction==='bottom'){edge.style.cssText+=`;left:0;right:0;height:${area*2}px;${direction}:${-area}px`;}
-      else edge.style.cssText+=`;top:0;bottom:0;width:${area*2}px;${direction}:${-area}px`;
+      if(direction==='top'||direction==='bottom'){edge.style.cssText+=`;left:0;right:0;height:${area+insetY}px;${direction}:${-area}px`;}
+      else edge.style.cssText+=`;top:0;bottom:0;width:${area+insetX}px;${direction}:${-area}px`;
     }
     const type=this.type(this.selected);this.handle.style.display=!this.editing&&['image','text'].includes(type)?'block':'none';this.handle.style.width=8/this.scale+'px';this.handle.style.height=8/this.scale+'px';
   }

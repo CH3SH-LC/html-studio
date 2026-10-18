@@ -1,17 +1,31 @@
 {
   "name": "html-studio",
   "productName": "HTML Studio",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "轻松修改 AI HTML 演示稿的本地应用",
   "main": "src/main.cjs",
   "private": true,
   "license": "MIT",
   "author": "HTML Studio contributors",
-  "repository": { "type": "git", "url": "git+https://github.com/CH3SH-LC/html-studio.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CH3SH-LC/html-studio.git"
+  },
   "homepage": "https://github.com/CH3SH-LC/html-studio#readme",
-  "bugs": { "url": "https://github.com/CH3SH-LC/html-studio/issues" },
-  "engines": { "node": ">=22" },
-  "keywords": ["html", "presentation", "editor", "electron", "offline", "ai-slides"],
+  "bugs": {
+    "url": "https://github.com/CH3SH-LC/html-studio/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "html",
+    "presentation",
+    "editor",
+    "electron",
+    "offline",
+    "ai-slides"
+  ],
   "scripts": {
     "start": "node scripts/launch.cjs",
     "setup": "node scripts/runtime.cjs",

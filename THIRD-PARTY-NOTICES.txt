@@ -1,4 +1,4 @@
-HTML Studio 0.3.0 third-party components
+HTML Studio 0.3.1 third-party components
 
 HTML Studio source code is MIT licensed; see HTML-STUDIO-LICENSE.txt in the
 portable application, or LICENSE in the source repository. The LICENSE beside

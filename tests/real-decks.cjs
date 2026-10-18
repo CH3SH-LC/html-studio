@@ -39,6 +39,8 @@ async function runCase(spec){
   if(await page.locator('#alertAction').isVisible()&&(await page.locator('#alertAction').textContent())==='定位素材'){
     await check('locate the existing parent asset folder',async()=>{await dialogs({open:path.join(corpus,'paper-master')});await page.locator('#alertAction').click();await page.locator('#loading').waitFor({state:'hidden'});assert.ok(!await page.locator('#alertBar').isVisible(),await page.locator('#alertText').textContent());});
   }
+  // The 1920px bundle must remain editable in the app's smallest normal window.
+  if(spec.bundle)c.editorBounds=await app.evaluate(({BrowserWindow})=>{const w=BrowserWindow.getAllWindows()[0];w.setSize(960,640);return w.getBounds();});
   const count=await page.locator('.thumbnail').count();
   if(count===spec.pages){
     await check('every page displays its headings and existing images',async()=>{
@@ -55,7 +57,7 @@ async function runCase(spec){
     });
     await thumb(0);await shot('01-before-edit');
     const replacement=`${spec.id} · 已验收修改`;
-    await check('double click and change real heading text',async()=>{const h=page.frameLocator('#canvas').locator(spec.selector).first().locator(spec.title||'h1,h2,h3').first();await h.dblclick();await page.keyboard.press('Control+A');await page.keyboard.insertText(replacement);await page.locator('#open').focus();assert.equal(await h.textContent(),replacement);});
+    await check('double click and change real heading text',async()=>{const h=page.frameLocator('#canvas').locator(spec.selector).first().locator(spec.title||'h1,h2,h3').first();await h.dblclick();assert.ok(await h.evaluate(el=>el.isContentEditable&&el.ownerDocument.activeElement===el),'double click must focus the text, including in small windows');await page.keyboard.press('Control+A');await page.keyboard.insertText(replacement);await page.locator('#open').focus();assert.equal(await h.textContent(),replacement);});
     let imageIndex=-1;
     for(let i=0;i<count;i++){if(await page.frameLocator('#canvas').locator(spec.selector).nth(i).locator('img').count()){imageIndex=i;break;}}
     c.imagePage=imageIndex+1;
